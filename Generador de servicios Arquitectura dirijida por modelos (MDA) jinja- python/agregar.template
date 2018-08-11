@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="agregar{{entity.name|capitalize}}.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.post("https://servicioweb-camus17.c9users.io:8080/servicio{{entity.name|capitalize}}",
+        {
+        
+        
+        {% for property in entity.properties %}{{property.name}}:document.getElementById("{{property.name}}").value,
+        {% endfor %}nulo:'c'
+        
+        },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
+</script>
+</head>
+<body>
+<div class="jumbotron text-center">
+  <h2>{{title}}{{entity.name}}</h2>
+  <hr>
+  <p>{{ message }}</p>
+
+  <form name="{{entity.name}}Form" class="form-horizontal">
+    {% for property in entity.properties %}
+    <div class="form-group">
+      <label for="{{property.name}}" class="col-sm-2 control-label">{{property.name|capitalize}}</label>
+      <div class="col-sm-10">
+        <input name="{{property.name}}" id="{{property.name}}" type="text" class="form-control"/>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+       
+      </div>
+    </div>
+  </form>
+  </div>
+  <p id="lista"></p>
+  <button>Guardar</button>
+  </body>
+  </html>

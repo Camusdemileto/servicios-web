@@ -1,0 +1,56 @@
+var express = require('express');
+var router = express.Router();
+var usuariosModel = require('../models/servicio{{entity.name|capitalize}}');
+
+router.get('/todos', function(request, response) {  
+   usuariosModel.getUsuarios(function(error, data)
+    {
+          response.status(200).json(data);
+    });
+});
+router.get('/{{entity.name|capitalize}}', function(request, response) {  
+  var id = request.query.id;
+  console.log(id)
+  usuariosModel.getUsuarioById(id,function(error, datos)
+      {
+       
+         response.status(200).json(datos);
+      });
+    });
+
+router.post('/{{entity.name|capitalize}}', function(request, response) { 
+  var datosUsuario = {
+  {% for property in entity.properties %}{{property.name}} : request.body.{{property.name}},{% endfor %}
+      nulo : ""
+    };
+    console.log(datosUsuario);
+    usuariosModel.insertUsuario(datosUsuario,function(error, datos)
+    {  response.status(200).json({datos});
+     
+    });
+});
+
+
+router.put('/{{entity.name|capitalize}}', function(request, response) {  
+    var datosUsuario = {
+      id:request.query.id,
+      nombre : request.query.nombre
+      };
+
+    usuariosModel.updateUsuario(datosUsuario,function(error, datos)
+    {
+        response.status(200).json(datos);
+    });
+
+});
+
+router.delete('/{{entity.name|capitalize}}', function(request, response) {  
+	var id = request.query.id;
+    usuariosModel.deleteUsuario(id,function(error, datos)
+    {
+       response.status(200).json(datos);
+    });
+
+});
+
+module.exports = router;

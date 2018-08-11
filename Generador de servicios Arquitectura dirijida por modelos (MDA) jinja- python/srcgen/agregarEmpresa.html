@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="agregarEmpresa.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.post("https://servicioweb-camus17.c9users.io:8080/servicioEmpresa",
+        {
+        
+        
+direccion:document.getElementById("direccion").value,
+empleado:document.getElementById("empleado").value,
+nit:document.getElementById("nit").value,
+nombre:document.getElementById("nombre").value,
+nulo:'c'
+        
+        },
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    });
+});
+</script>
+</head>
+<body>
+<div class="jumbotron text-center">
+  <h2>Escriba los datos de Empresa</h2>
+  <hr>
+  <p>Ingreso de Datos</p>
+
+  <form name="EmpresaForm" class="form-horizontal">
+    <div class="form-group">
+      <label for="direccion" class="col-sm-2 control-label">Direccion</label>
+      <div class="col-sm-10">
+        <input name="direccion" id="direccion" type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="empleado" class="col-sm-2 control-label">Empleado</label>
+      <div class="col-sm-10">
+        <input name="empleado" id="empleado" type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="nit" class="col-sm-2 control-label">Nit</label>
+      <div class="col-sm-10">
+        <input name="nit" id="nit" type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="nombre" class="col-sm-2 control-label">Nombre</label>
+      <div class="col-sm-10">
+        <input name="nombre" id="nombre" type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+       
+      </div>
+    </div>
+  </form>
+  </div>
+  <p id="lista"></p>
+  <button>Guardar</button>
+  </body>
+  </html>
