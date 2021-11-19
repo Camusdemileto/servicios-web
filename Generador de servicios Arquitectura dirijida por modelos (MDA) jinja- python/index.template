@@ -1,0 +1,11 @@
+<div class="jumbotron text-center">
+  <h2>{{title}}{{entity.name}}</h2>
+  <hr>
+  <p>{{ message }}</p>
+
+  <form name="{{entity.name}}Form" class="form-horizontal">
+    <ul>
+      <li><a href="agregar{{entity.name|capitalize}}.html">Ir al formulario de {{entity.name}}</a></li>
+    </ul>
+  </form>
+  </div>

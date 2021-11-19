@@ -1,0 +1,47 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+32247552[ label="{Comment|\\/\\/.*$}"]
+
+32216368 -> 31774336[arrowtail=diamond, dir=both, headlabel="types 0..*"]
+32216368 -> 32224304[arrowtail=diamond, dir=both, headlabel="entities 1..*"]
+32216368[ label="{EntityModel|}"]
+
+31774336[ label="{SimpleType|+name:ID\l}"]
+
+32224304 -> 32233360[arrowtail=diamond, dir=both, headlabel="properties 1..*"]
+32224304[ label="{Entity|+name:ID\l}"]
+
+32233360 -> 32240848[headlabel="type "]
+32233360[ label="{Property|+name:ID\l}"]
+
+32240848[ label="{*Type|}"]
+32240848 -> 31774336 [dir=back]
+32240848 -> 32224304 [dir=back]
+
+31769136[ label="{STRING|}"]
+
+32077312[ label="{BASETYPE|}"]
+
+31935936[ label="{INT|}"]
+
+32070960[ label="{FLOAT|}"]
+
+32073744[ label="{NUMBER|}"]
+
+31933152[ label="{BOOL|}"]
+
+31767136[ label="{ID|}"]
+
+
+}

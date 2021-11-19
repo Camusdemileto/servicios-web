@@ -1,0 +1,72 @@
+//Importamos express
+var express = require('express');
+//Creamos el objeto para definir las rutas
+var router = express.Router();
+//Importamos el modelo que ejecutará las sentencias SQL
+var usuariosModel = require('../models/{{entity.name|capitalize}}');
+
+//Coger todos los usuarios
+router.get('/todos', function(request, response) {  
+   usuariosModel.getUsuarios(function(error, data)
+    {
+          response.status(200).json(data);
+    });
+});
+//Coger usuario por id
+router.get('/{{entity.name|capitalize}}', function(request, response) {  
+  var id = request.query.id;
+  console.log(id)
+  usuariosModel.getUsuarioById(id,function(error, datos)
+      {
+       
+         response.status(200).json(datos);
+      });
+    });
+//Insertar usuario
+/*
+Ejemplo de uso:
+en el Body:
+{ 
+"nombre": "Usuario de Prueba"
+}
+
+
+*/
+router.post('/{{entity.name|capitalize}}', function(request, response) { 
+  var datosUsuario = {
+  {% for property in entity.properties %}{{property.name}} : request.body.{{property.name}},{% endfor %}
+      nulo : ""
+    };
+    console.log(datosUsuario);
+    usuariosModel.insertUsuario(datosUsuario,function(error, datos)
+    {  response.status(200).json({datos});
+     
+    });
+});
+
+//Modificar un usuario
+router.put('/{{entity.name|capitalize}}', function(request, response) {  
+    var datosUsuario = {
+      id:request.query.id,
+      nombre : request.query.nombre
+      };
+
+    usuariosModel.updateUsuario(datosUsuario,function(error, datos)
+    {
+      //si el usuario se ha actualizado correctamente mostramos un mensaje
+     response.status(200).json(datos);
+    });
+
+});
+//Borrar un usuario
+
+router.delete('/{{entity.name|capitalize}}', function(request, response) {  
+	var id = request.query.id;
+    usuariosModel.deleteUsuario(id,function(error, datos)
+    {
+       response.status(200).json(datos);
+    });
+
+});
+
+module.exports = router;
